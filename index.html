@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCRTracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img src="ribbon.png" alt="BCRTracker"><span>BCRTracker</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active" data-i18n="home">Accueil</a></li>
+      <li><a href="predict.html"  data-i18n="predict">Prédiction</a></li>
+      <li><a href="prevention.html"  data-i18n="prevention">Prévention</a></li>
+      <li><a href="about.html"  data-i18n="about">À propos</a></li>
+    </ul>
+    <div class="nav-actions">
+      <select id="languageSelect" class="select" aria-label="Language"><option value="fr">FR</option><option value="en">EN</option><option value="ar">AR</option></select>
+      <button class="icon-btn" id="modeButton" type="button" aria-label="Dark mode">☾</button>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+  <section class="hero">
+    <div>
+      <div class="badge">✦ <span data-i18n="badge">AI-Powered Prediction</span></div>
+      <h1><span data-i18n="title1">Prédiction du risque de récidive</span><br><span class="gradient-text" data-i18n="title2">du cancer du sein</span></h1>
+      <p class="subtitle" data-i18n="subtitle">Basée sur les caractéristiques cliniques et génomiques. Une aide académique pour mieux présenter le risque estimé par le modèle.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="predict.html"><span data-i18n="start">Lancer la prédiction</span> →</a>
+        <a class="btn btn-outline" href="about.html" data-i18n="learn">En savoir plus</a>
+      </div>
+      <div class="feature-row">
+        <div class="feature"><span>✓</span><p data-i18n="f1">Évaluation personnalisée du risque</p></div>
+        <div class="feature"><span>✓</span><p data-i18n="f2">Données cliniques et génomiques</p></div>
+        <div class="feature"><span>✓</span><p data-i18n="f3">Résultat clair et interprétable</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Awareness Stats Section -->
+  <section class="awareness-section">
+    <div class="awareness-header">
+      <span class="awareness-badge">🎗️ <span data-i18n="awarenessLabel">Sensibilisation</span></span>
+      <h2 data-i18n="awarenessTitle">Le cancer du sein en chiffres</h2>
+      <p data-i18n="awarenessSubtitle">Des données mondiales pour mieux comprendre et agir.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card stat-card--primary">
+        <div class="stat-number">2,3M</div>
+        <div class="stat-label" data-i18n="stat1Label">nouveaux cas diagnostiqués par an dans le monde</div>
+        <div class="stat-source" data-i18n="stat1Source">Source : OMS, 2022</div>
+      </div>
+      <div class="stat-card stat-card--purple">
+        <div class="stat-number">1/8</div>
+        <div class="stat-label" data-i18n="stat2Label">femmes développeront un cancer du sein au cours de leur vie</div>
+        <div class="stat-source" data-i18n="stat2Source">Source : American Cancer Society</div>
+      </div>
+      <div class="stat-card stat-card--rose">
+        <div class="stat-number">99%</div>
+        <div class="stat-label" data-i18n="stat3Label">de survie à 5 ans si détecté au stade précoce</div>
+        <div class="stat-source" data-i18n="stat3Source">Source : NCI, 2023</div>
+      </div>
+      <div class="stat-card stat-card--soft">
+        <div class="stat-number">685k</div>
+        <div class="stat-label" data-i18n="stat4Label">décès par an, dont 70% dans les pays à revenu faible ou moyen</div>
+        <div class="stat-source" data-i18n="stat4Source">Source : OMS, 2022</div>
+      </div>
+    </div>
+    <div class="awareness-cta">
+      <a class="btn btn-outline" href="prevention.html" data-i18n="awareCta">Découvrir la prévention →</a>
+    </div>
+  </section>
+</main>
+
+<a class="donate-float" href="donate.html" data-i18n="donate">Faire un don</a>
+<footer class="footer"><img src="usthb.jpg" alt="USTHB" class="footer-logo"><span data-i18n="footer">© 2026 — BCRTracker — Projet académique de prédiction de la récidive du cancer du sein</span></footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

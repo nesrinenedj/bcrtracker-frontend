@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCRTracker — Prédiction</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img src="ribbon.png" alt="BCRTracker"><span>BCRTracker</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html"  data-i18n="home">Accueil</a></li>
+      <li><a href="predict.html" class="active" data-i18n="predict">Prédiction</a></li>
+      <li><a href="prevention.html"  data-i18n="prevention">Prévention</a></li>
+      <li><a href="about.html"  data-i18n="about">À propos</a></li>
+    </ul>
+    <div class="nav-actions">
+      <select id="languageSelect" class="select" aria-label="Language"><option value="fr">FR</option><option value="en">EN</option><option value="ar">AR</option></select>
+      <button class="icon-btn" id="modeButton" type="button" aria-label="Dark mode">☾</button>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+  <section class="section-head">
+    <h1 class="section-title" data-i18n="predictTitle">Prédiction du risque de récidive</h1>
+    <p class="section-intro" data-i18n="predictIntro">Tous les champs cliniques sont obligatoires. Seules les données génomiques sont optionnelles.</p>
+  </section>
+  <form id="predictionForm" class="form">
+
+    <!-- Patient Info -->
+    <section class="form-section">
+      <h2 data-i18n="patient">Informations patient</h2>
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="fldAge">Âge au diagnostic <span class="required-star">*</span></label>
+          <input type="number" name="INVASIVE_CARCINOMA_DX_AGE" min="18" max="100" placeholder="ex: 52" required>
+        </div>
+        <div class="field">
+          <label data-i18n="fldSex">Sexe <span class="required-star">*</span></label>
+          <select name="SEX" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option value="Female" data-i18n="optFemale">Féminin</option>
+            <option value="Male" data-i18n="optMale">Masculin</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="fldMeno">Statut ménopausique <span class="required-star">*</span></label>
+          <select name="MENOPAUSAL_STATUS_AT_DIAGNOSIS" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option value="Pre" data-i18n="optPre">Pré-ménopause</option>
+            <option value="Peri" data-i18n="optPeri">Péri-ménopause</option>
+            <option value="Post" data-i18n="optPost">Post-ménopause</option>
+            <option value="Male" data-i18n="optMale">Masculin</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="fldLaterality">Latéralité <span class="required-star">*</span></label>
+          <select name="LATERALITY" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option value="Bilateral/Right" data-i18n="optBilateral">Bilatéral/Droite</option>
+            <option value="Left" data-i18n="optLeft">Gauche</option>
+            <option value="Right" data-i18n="optRight">Droite</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Staging -->
+    <section class="form-section">
+      <h2 data-i18n="staging">Stadification</h2>
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="fldTStage">Stade T <span class="required-star">*</span></label>
+          <select name="T_STAGE" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option>T0</option><option>T1MI</option><option>T1A</option><option>T1B</option><option>T1C</option>
+            <option>T1</option><option>T2</option><option>T3</option><option>T4A</option>
+            <option>T4B</option><option>T4C</option><option>T4D</option><option>T4</option><option>TIS</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="fldNStage">Stade N <span class="required-star">*</span></label>
+          <select name="N_STAGE" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option>N0</option><option>N0(I+)</option><option>N1MI</option><option>N1A</option>
+            <option>N1B</option><option>N1C</option><option>N1</option><option>N2A</option><option>N2B</option>
+            <option>N2</option><option>N3A</option><option>N3B</option><option>N3C</option><option>N3</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="fldMStage">Stade M <span class="required-star">*</span></label>
+          <select name="M_STAGE" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option>M0</option><option>M1</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="fldDxStage">Stade au diagnostic <span class="required-star">*</span></label>
+          <select name="STAGE_AT_DIAGNOSIS" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option>IA</option><option>IB</option><option>IIA</option><option>IIB</option>
+            <option>IIIA</option><option>IIIB</option><option>IIIC</option><option>IV</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tumor characteristics -->
+    <section class="form-section">
+      <h2 data-i18n="tumor">Caractéristiques tumorales</h2>
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="fldTumorGrade">Grade tumoral <span class="required-star">*</span></label>
+          <select name="OVERALL_TUMOR_GRADE" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option value="I Low Grade (Well Differentiated)" data-i18n="optGrade1">I – Bien différencié</option>
+            <option value="II Intermediate Grade (Moderately Differentiated)" data-i18n="optGrade2">II – Modérément différencié</option>
+            <option value="III High Grade (Poorly Differentiated)" data-i18n="optGrade3">III – Peu différencié</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="fldNuclearGrade">Grade nucléaire <span class="required-star">*</span></label>
+          <select name="PRIMARY_NUCLEAR_GRADE" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option value="I (Low)" data-i18n="optNuclear1">I (Bas)</option>
+            <option value="II (Intermediate)" data-i18n="optNuclear2">II (Intermédiaire)</option>
+            <option value="III (High)" data-i18n="optNuclear3">III (Élevé)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="fldHistology">Histologie <span class="required-star">*</span></label>
+          <select name="TUMOR_SAMPLE_HISTOLOGY" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option value="Breast Invasive Ductal Carcinoma" data-i18n="optHistIDC">Carcinome canalaire invasif du sein</option>
+            <option value="Breast Invasive Lobular Carcinoma" data-i18n="optHistILC">Carcinome lobulaire invasif du sein</option>
+            <option value="Breast Invasive Carcinosarcoma" data-i18n="optHistCarcinosarcoma">Carcinosarcome invasif du sein</option>
+            <option value="Breast Invasive Mixed Mucinous Carcinoma" data-i18n="optHistMucinous">Carcinome mucineux mixte invasif</option>
+            <option value="Breast Invasive Myoepithelial Carcinoma" data-i18n="optHistMyoepithelial">Carcinome myoépithélial invasif</option>
+            <option value="Breast Metaplastic Carcinoma" data-i18n="optHistMetaplastic">Carcinome métaplasique du sein</option>
+            <option value="Breast Mixed Ductal and Lobular Carcinoma" data-i18n="optHistMixed">Carcinome mixte canalaire et lobulaire</option>
+            <option value="Breast Undifferentiated Carcinoma" data-i18n="optHistUndiff">Carcinome indifférencié du sein</option>
+            <option value="Tubular Carcinoma" data-i18n="optHistTubular">Carcinome tubulaire</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Receptor status -->
+    <section class="form-section">
+      <h2 data-i18n="receptors">Statut des récepteurs</h2>
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="fldHer2Primary">HER2 primaire <span class="required-star">*</span></label>
+          <select name="HER2_STATUS_PRIMARY" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option value="Negative" data-i18n="optNegative">Négatif</option>
+            <option value="Negative (Outside Positive)" data-i18n="optNegOutsidePos">Négatif (Positif externe)</option>
+            <option value="Equivocal" data-i18n="optEquivocal">Équivoque</option>
+            <option value="Positive" data-i18n="optPositive">Positif</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="fldHer2Overall">HER2 global <span class="required-star">*</span></label>
+          <select name="OVERALL_HER2_STATUS" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option value="Negative" data-i18n="optNegative">Négatif</option>
+            <option value="Equivocal" data-i18n="optEquivocal">Équivoque</option>
+            <option value="Positive" data-i18n="optPositive">Positif</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="fldER">ER % <span class="required-star">*</span></label>
+          <input type="number" step="0.1" min="0" max="100" name="ER_PCT_PRIMARY" placeholder="0 – 100" required>
+        </div>
+        <div class="field">
+          <label data-i18n="fldPR">PR % <span class="required-star">*</span></label>
+          <input type="number" step="0.1" min="0" max="100" name="PR_PCT_PRIMARY" placeholder="0 – 100" required>
+        </div>
+        <div class="field">
+          <label data-i18n="fldReceptorPatient">Récepteurs patient <span class="required-star">*</span></label>
+          <select name="OVERALL_RECEPTOR_STATUS_PATIENT" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option value="HR+/HER2-">HR+/HER2-</option>
+            <option value="HR-/HER2+">HR-/HER2+</option>
+            <option value="Triple Negative" data-i18n="optTripleNeg">Triple négatif</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="fldReceptorPrimary">Récepteurs primaires <span class="required-star">*</span></label>
+          <select name="RECEPTOR_STATUS_PRIMARY" required>
+            <option value="" data-i18n="optSelectOne">-- Sélectionner --</option>
+            <option value="HR+/HER2-">HR+/HER2-</option>
+            <option value="HR+/HER2_Equivocal">HR+/HER2_Equivocal</option>
+            <option value="HR+/HER2_Unknown">HR+/HER2_Unknown</option>
+            <option value="HR-/HER2+">HR-/HER2+</option>
+            <option value="HR-/HER2-">HR-/HER2-</option>
+            <option value="HR-/HER2_Equivocal">HR-/HER2_Equivocal</option>
+            <option value="HR-/HER2_Unknown">HR-/HER2_Unknown</option>
+            <option value="Triple Negative" data-i18n="optTripleNeg">Triple négatif</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Genomic (optional) -->
+    <section class="form-section">
+      <h2 data-i18n="genomic">Données génomiques optionnelles</h2>
+      <label class="toggle-line"><input type="checkbox" id="hasGenes"> <span data-i18n="geneToggle">J'ai des données de mutations génétiques</span></label>
+      <div id="geneSection" class="hidden">
+        <input id="geneSearch" type="text" data-i18n-placeholder="geneSearch" placeholder="Rechercher un gène...">
+        <div id="geneGrid" class="gene-grid"></div>
+      </div>
+    </section>
+
+    <button class="btn btn-primary" type="submit" data-i18n="submit">Calculer le risque</button>
+    <p id="loading" class="loading" data-i18n="loading">Analyse en cours...</p>
+    <p id="formError" class="error"></p>
+  </form>
+</main>
+
+<a class="donate-float" href="donate.html" data-i18n="donate">Faire un don</a>
+<footer class="footer"><img src="usthb.jpg" alt="USTHB" class="footer-logo"><span data-i18n="footer">© 2026 — BCRTracker — Projet académique de prédiction de la récidive du cancer du sein</span></footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

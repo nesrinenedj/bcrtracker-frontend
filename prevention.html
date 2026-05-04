@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCRTracker — Prévention</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img src="ribbon.png" alt="BCRTracker"><span>BCRTracker</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html"  data-i18n="home">Accueil</a></li>
+      <li><a href="predict.html"  data-i18n="predict">Prédiction</a></li>
+      <li><a href="prevention.html" class="active" data-i18n="prevention">Prévention</a></li>
+      <li><a href="about.html"  data-i18n="about">À propos</a></li>
+    </ul>
+    <div class="nav-actions">
+      <select id="languageSelect" class="select" aria-label="Language"><option value="fr">FR</option><option value="en">EN</option><option value="ar">AR</option></select>
+      <button class="icon-btn" id="modeButton" type="button" aria-label="Dark mode">☾</button>
+    </div>
+  </div>
+</nav>
+
+
+<main class="container">
+  <section class="section-head">
+    <h1 class="section-title" data-i18n="preventionTitle">Prévention et sensibilisation</h1>
+    <p class="section-intro" data-i18n="preventionIntro">Quelques informations générales pour soutenir la prévention, le dépistage et le suivi.</p>
+  </section>
+  <div class="grid-2">
+    <article class="card"><h2 data-i18n="signs">Signes d’alerte</h2><ul><li>Grosseur ou changement inhabituel du sein.</li><li>Changement de la peau ou du mamelon.</li><li>Écoulement anormal ou douleur persistante.</li></ul></article>
+    <article class="card"><h2 data-i18n="riskFactors">Facteurs de risque</h2><ul><li>Âge et antécédents familiaux.</li><li>Mutations héréditaires et facteurs hormonaux.</li><li>Antécédents personnels de cancer du sein.</li></ul></article>
+  </div>
+  <section style="margin-top:1.4rem">
+    <h2 class="section-title" data-i18n="resources">Ressources utiles</h2>
+    <div class="grid-3">
+      <a class="card" href="https://www.who.int/fr/news-room/fact-sheets/detail/breast-cancer" target="_blank">OMS — Cancer du sein</a>
+      <a class="card" href="https://www.cancer.fr/personnes-malades/les-cancers/sein" target="_blank">INCa — Cancer du sein</a>
+      <a class="card" href="https://www.elfedjr.com/" target="_blank">El Fedjr — Algérie</a>
+    </div>
+  </section>
+</main>
+
+<a class="donate-float" href="donate.html" data-i18n="donate">Faire un don</a>
+<footer class="footer"><img src="usthb.jpg" alt="USTHB" class="footer-logo"><span data-i18n="footer">© 2026 — BCRTracker — Projet académique de prédiction de la récidive du cancer du sein</span></footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
