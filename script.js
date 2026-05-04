@@ -84,7 +84,10 @@ const I18N = {
   signs:"Signes d'alerte", riskFactors:"Facteurs de risque", resources:"Ressources utiles",
   donateTitle:"Faire un don", donateIntro:"Cette page regroupe des associations et organismes liés au soutien des personnes touchées par le cancer du sein.",
   note:"Vérifiez toujours les informations de contact directement sur les sites officiels.",
-  footer:"© 2026 — BCRTracker — Projet académique de prédiction de la récidive du cancer du sein"
+  footer:"© 2026 — BCRTracker — Projet académique de prédiction de la récidive du cancer du sein",
+  saveResult:"Sauvegarder le résultat",
+  savedSuccess:"Résultat sauvegardé !",
+  saveError:"Erreur lors de la sauvegarde"
  },
  en:{
   home:"Home", predict:"Prediction", prevention:"Prevention", about:"About", donate:"Donate",
@@ -162,7 +165,10 @@ const I18N = {
   signs:"Warning signs", riskFactors:"Risk factors", resources:"Useful resources",
   donateTitle:"Donate", donateIntro:"This page lists associations and organizations linked to support for people affected by breast cancer.",
   note:"Always verify contact information directly on the official websites.",
-  footer:"© 2026 — BCRTracker — Academic breast cancer recurrence prediction project"
+  footer:"© 2026 — BCRTracker — Academic breast cancer recurrence prediction project",
+  saveResult:"Save result",
+  savedSuccess:"Result saved!",
+  saveError:"Error saving result"
  },
  ar:{
   home:"الرئيسية", predict:"التنبؤ", prevention:"الوقاية", about:"حول المشروع", donate:"تبرع",
@@ -240,7 +246,10 @@ const I18N = {
   signs:"علامات التنبيه", riskFactors:"عوامل الخطر", resources:"مصادر مفيدة",
   donateTitle:"تبرع", donateIntro:"تجمع هذه الصفحة جمعيات ومنظمات مرتبطة بدعم الأشخاص المتأثرين بسرطان الثدي.",
   note:"تحقق دائماً من معلومات الاتصال مباشرة من المواقع الرسمية.",
-  footer:"© 2026 — BCRTracker — مشروع أكاديمي للتنبؤ بعودة سرطان الثدي"
+  footer:"© 2026 — BCRTracker — مشروع أكاديمي للتنبؤ بعودة سرطان الثدي",
+  saveResult:"حفظ النتيجة",
+  savedSuccess:"تم حفظ النتيجة!",
+  saveError:"خطأ في حفظ النتيجة"
  }
 };
 
@@ -373,5 +382,81 @@ function initResult(){
   const klass=risk.toLowerCase()==="low"?"risk-low":risk.toLowerCase()==="medium"?"risk-medium":"risk-high";
   const demoBanner = d._demo ? `<div class="demo-notice">⚠️ ${t("demoNotice")}</div>` : "";
   box.innerHTML=demoBanner+`<div class="result-card"><span class="probability">${p}%</span><p>${t("resultTitle")}</p><span class="risk-pill ${klass}">${risk}</span><p class="helper">${d.model_used||""}</p></div>`;
+  // Bouton sauvegarder
+  const saveBtn = document.getElementById("saveResultBtn");
+  if(saveBtn) {
+    saveBtn.addEventListener("click", function() {
+      saveResultToFile(d, p, risk);
+    });
+  }
 }
+// Fonction pour sauvegarder le résultat
+function saveResultToFile(result, probability, riskLevel) {
+  try {
+    const date = new Date();
+    const formattedDate = date.toLocaleString();
+    
+    const fileContent = `========================================
+BCRTracker - Résultat de prédiction
+========================================
+
+Date : ${formattedDate}
+Probabilité de récidive : ${probability}%
+Niveau de risque : ${riskLevel}
+Modèle utilisé : ${result.model_used || "Non spécifié"}
+
+========================================
+Ce résultat est une estimation basée sur le modèle
+d'apprentissage automatique. Il ne remplace pas
+l'avis d'un médecin.
+========================================`;
+    
+    const blob = new Blob([fileContent], {type: "text/plain"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `bcrtracker_result_${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    showNotification(t("savedSuccess"), "success");
+  } catch(error) {
+    showNotification(t("saveError"), "error");
+  }
+}
+
+// Fonction pour afficher une notification
+function showNotification(message, type) {
+  const notification = document.createElement("div");
+  notification.textContent = message;
+  notification.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: ${type === "success" ? "#0f9d58" : "#d93025"};
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    z-index: 1000;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    animation: fadeInOut 2.5s ease forwards;
+  `;
+  document.body.appendChild(notification);
+  setTimeout(() => notification.remove(), 2500);
+}
+
+// Ajouter l'animation CSS
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(20px); }
+    15% { opacity: 1; transform: translateY(0); }
+    85% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+  }
+`;
+document.head.appendChild(style);
 document.addEventListener("DOMContentLoaded",initResult);
