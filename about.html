@@ -39,17 +39,17 @@
   <section style="margin-top:1.2rem">
     <article class="card methodology-text-card">
       <h2 data-i18n="methodology">Méthodologie</h2>
-      <p data-i18n="methodLong1">Notre outil repose sur un modèle d’apprentissage automatique entraîné pour estimer le risque de récidive du cancer du sein à partir de données cliniques, avec la possibilité d’ajouter des données génomiques lorsqu’elles sont disponibles. Les informations saisies par l’utilisateur sont envoyées au backend sous forme de données brutes, puis le modèle applique les étapes nécessaires avant de produire une estimation.</p>
+      <p data-i18n="methodLong1">Notre outil repose sur un modèle d'apprentissage automatique conçu pour estimer le risque de récidive du cancer du sein à partir de données cliniques, avec la possibilité d'inclure des informations génomiques lorsqu'elles sont disponibles. Les informations saisies sont traitées par le modèle en plusieurs étapes avant de produire un résultat estimé.</p>
       <p data-i18n="methodLong2">Les principaux indicateurs utilisés incluent :</p>
       <ul class="methodology-bullets">
         <li data-i18n="methodBullet1">La taille tumorale et la stadification TNM.</li>
         <li data-i18n="methodBullet2">Le grade tumoral et les caractéristiques histologiques.</li>
         <li data-i18n="methodBullet3">Le statut des récepteurs hormonaux et HER2.</li>
-        <li data-i18n="methodBullet4">Les informations démographiques de la patiente, comme l’âge au diagnostic.</li>
-        <li data-i18n="methodBullet5">Les mutations génétiques, si elles sont disponibles.</li>
+        <li data-i18n="methodBullet4">Les informations démographiques de la patiente, comme l'âge au diagnostic.</li>
+        <li data-i18n="methodBullet5">Les mutations génétiques, lorsqu'elles sont disponibles.</li>
       </ul>
-      <p data-i18n="methodLong3">Après la saisie, le backend prend en charge l’encodage des variables, le traitement des valeurs manquantes et l’exécution du modèle entraîné. Le frontend ne modifie pas les données : il sert uniquement à collecter les informations, envoyer la requête et afficher le résultat sous une forme claire.</p>
-      <p data-i18n="methodLong4">Le résultat final est présenté sous forme d’une probabilité de récidive, accompagnée d’un niveau de risque. Cette estimation reste un résultat académique et ne doit pas être interprétée comme un diagnostic médical.</p>
+      <p data-i18n="methodLong3">Après la saisie des données, le système prépare les informations en traitant les variables catégorielles, les valeurs manquantes et les étapes de prétraitement nécessaires. Le modèle entraîné analyse ensuite les données disponibles et génère une estimation du risque de récidive.</p>
+      <p data-i18n="methodLong4">Le résultat final est présenté sous forme d'une probabilité de récidive avec un niveau de risque. Cette estimation reste un résultat académique et ne doit pas être interprétée comme un diagnostic médical.</p>
     </article>
   </section>
 
