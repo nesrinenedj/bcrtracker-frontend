@@ -40,7 +40,7 @@ methodLong4:"Le résultat final est présenté sous forme d'une probabilité de 
   m3:"Affichage du résultat", m3t:"La page résultat affiche la probabilité de récidive, le niveau de risque et le modèle utilisé.",
   disclaimer:"Limite importante", disclaimerText:"Ce site est un prototype académique. Il ne remplace pas un diagnostic, un avis médical ou une décision thérapeutique.",
   aboutTitle:"À propos du projet", aboutIntro:"BCRTracker a été développé dans le cadre d'un projet de fin d'études sur la prédiction de la récidive du cancer du sein par apprentissage automatique.",
-  dataModel:"Données et modèle", dataText:"Le frontend collecte les valeurs brutes. Le backend gère l'encodage, l'imputation et la prédiction.",
+  dataModel:"Modèle de prédiction", modelDetails:"• Modèle final: XGBoost<br>• Valeurs manquantes: Imputation KNN<br>• Déséquilibre des classes: ADASYN<br>• Sortie: probabilité de récidive et niveau de risque",
   objective:"Objectif", objectiveText:"L'objectif est de proposer une estimation claire du risque de récidive et de rendre le résultat plus lisible.",
 
   // Prediction form
@@ -138,7 +138,7 @@ methodLong4:"The final result is presented as a recurrence probability with a ri
   m3:"Result display", m3t:"The result page displays recurrence probability, risk level, and the model used.",
   disclaimer:"Important limitation", disclaimerText:"This website is an academic prototype. It does not replace diagnosis, medical advice, or treatment decisions.",
   aboutTitle:"About the project", aboutIntro:"BCRTracker was developed as a final-year project on breast cancer recurrence prediction using machine learning.",
-  dataModel:"Data and model", dataText:"The frontend collects raw values. The backend handles encoding, imputation, and prediction.",
+  dataModel:"Prediction model", modelDetails:"• Final model: XGBoost<br>• Missing values: KNN imputation<br>• Class imbalance: ADASYN<br>• Output: recurrence probability and risk level",
   objective:"Objective", objectiveText:"The objective is to provide a clear recurrence-risk estimate and make the result easier to understand.",
 
   predictTitle:"Recurrence risk prediction", predictIntro:"All clinical fields are required. Only genomic data is optional.",
@@ -233,7 +233,7 @@ methodLong4:"يتم تقديم النتيجة النهائية كاحتمال ل
   m3:"عرض النتيجة", m3t:"تعرض صفحة النتيجة احتمال عودة المرض، مستوى الخطر، والنموذج المستخدم.",
   disclaimer:"تنبيه مهم", disclaimerText:"هذا الموقع نموذج أكاديمي ولا يعوض التشخيص أو الرأي الطبي أو القرار العلاجي.",
   aboutTitle:"حول المشروع", aboutIntro:"تم تطوير BCRTracker في إطار مشروع نهاية الدراسة حول التنبؤ بعودة سرطان الثدي باستعمال التعلم الآلي.",
-  dataModel:"البيانات والنموذج", dataText:"تجمع الواجهة القيم الخام. يتكفل الخادم بالترميز، التعويض، والتنبؤ.",
+  dataModel:"نموذج التنبؤ",  modelDetails:"• النموذج النهائي: XGBoost<br>• القيم المفقودة: تقدير KNN<br>• اختلال التوازن الطبقي: ADASYN<br>• المخرجات: احتمال عودة المرض ومستوى الخطر",
   objective:"الهدف", objectiveText:"الهدف هو تقديم تقدير واضح لخطر عودة المرض وجعل النتيجة أسهل للفهم.",
 
   predictTitle:"التنبؤ بخطر عودة المرض", predictIntro:"جميع الحقول السريرية إلزامية. البيانات الجينومية فقط اختيارية.",
