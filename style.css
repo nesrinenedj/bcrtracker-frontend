@@ -201,6 +201,19 @@ h1{
   gap: 0.6rem;
 }
 
+.feature-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
 .feature span {
   width: 28px;
   height: 28px;
