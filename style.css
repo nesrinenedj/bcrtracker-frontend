@@ -188,11 +188,35 @@ h1{
 .hero-visual{display:none}
 .glow{display:none}
 .hero-logo{display:none}
-.feature span{
-  width:30px;height:30px;border-radius:999px;
-  display:grid;place-items:center;
-  color:var(--primary);
-  background:var(--soft);
+.feature-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.feature span {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  background: var(--soft);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.feature p {
+  margin: 0;
+  color: var(--text);
 }
 
 .section-head{max-width:780px;margin-bottom:1.35rem}
