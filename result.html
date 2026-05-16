@@ -13,30 +13,54 @@
   <div class="nav-inner">
     <a class="brand" href="index.html"><img src="ribbon.png" alt="BCRTracker"><span>BCRTracker</span></a>
     <ul class="nav-links">
-      <li><a href="index.html"  data-i18n="home">Accueil</a></li>
+      <li><a href="index.html" data-i18n="home">Accueil</a></li>
       <li><a href="predict.html" class="active" data-i18n="predict">Prédiction</a></li>
-      <li><a href="prevention.html"  data-i18n="prevention">Prévention</a></li>
-      <li><a href="about.html"  data-i18n="about">À propos</a></li>
+      <li><a href="prevention.html" data-i18n="prevention">Prévention</a></li>
+      <li><a href="about.html" data-i18n="about">À propos</a></li>
     </ul>
     <div class="nav-actions">
-      <select id="languageSelect" class="select" aria-label="Language"><option value="fr">FR</option><option value="en">EN</option><option value="ar">AR</option></select>
+      <select id="languageSelect" class="select" aria-label="Language">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+        <option value="ar">AR</option>
+      </select>
       <button class="icon-btn" id="modeButton" type="button" aria-label="Dark mode">☾</button>
     </div>
   </div>
 </nav>
 
-
 <main class="container">
   <section class="section-head">
     <h1 class="section-title" data-i18n="resultTitle">Résultat de la prédiction</h1>
   </section>
-  <div id="resultBox"></div>
-  <div class="actions" style="margin-top:1rem"><a href="predict.html" class="btn btn-primary" data-i18n="newPrediction">Nouvelle prédiction</a><a href="index.html" class="btn btn-outline" data-i18n="home">Accueil</a><button id="saveResultBtn" class="btn btn-outline">Sauvegarder le résultat</button></div>
-  <div class="notice" style="margin-top:1.2rem"><strong data-i18n="disclaimer">Limite importante</strong><br><span data-i18n="disclaimerText">Ce site est un prototype académique. Il ne remplace pas un diagnostic, un avis médical ou une décision thérapeutique.</span></div>
+  
+  <div id="resultBox">
+    <!-- Le résultat sera affiché ici dynamiquement par script.js -->
+    <div class="result-card" style="text-align: center; padding: 2rem;">
+      <div class="probability">--</div>
+      <p>Chargement...</p>
+    </div>
+  </div>
+  
+  <div class="actions" style="margin-top:1rem">
+    <a href="predict.html" class="btn btn-primary" data-i18n="newPrediction">Nouvelle prédiction</a>
+    <a href="index.html" class="btn btn-outline" data-i18n="home">Accueil</a>
+    <button id="saveResultBtn" class="btn btn-outline" data-i18n="saveResult">Sauvegarder le résultat</button>
+  </div>
+  
+  <div class="notice" style="margin-top:1.2rem">
+    <strong data-i18n="disclaimer">Limite importante</strong><br>
+    <span data-i18n="disclaimerText">Ce site est un prototype académique. Il ne remplace pas un diagnostic, un avis médical ou une décision thérapeutique.</span>
+  </div>
 </main>
 
 <a class="donate-float" href="donate.html" data-i18n="donate">Faire un don</a>
-<footer class="footer"><img src="usthb.jpg" alt="USTHB" class="footer-logo"><span data-i18n="footer">© 2026 — BCRTracker — Projet académique de prédiction de la récidive du cancer du sein</span></footer>
+
+<footer class="footer">
+  <img src="usthb.jpg" alt="USTHB" class="footer-logo">
+  <span data-i18n="footer">© 2026 — BCRTracker — Projet académique de prédiction de la récidive du cancer du sein</span>
+</footer>
+
 </div>
 <script src="script.js"></script>
 </body>
