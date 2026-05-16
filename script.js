@@ -41,7 +41,7 @@ methodLong4:"Le résultat final est présenté sous forme d'une probabilité de 
   disclaimer:"Limite importante", disclaimerText:"Ce site est un prototype académique. Il ne remplace pas un diagnostic, un avis médical ou une décision thérapeutique.",
   aboutTitle:"À propos du projet", aboutIntro:"BCRTracker a été développé dans le cadre d'un projet de fin d'études sur la prédiction de la récidive du cancer du sein par apprentissage automatique.",
   dataModel:"Modèle de prédiction",
-dataText:"Le frontend collecte les valeurs brutes. Le backend gère l'encodage, l'imputation et la prédiction.",
+
 modelDetailsTitle:"Détails du modèle :",
 modelBullet1:"Modèle final: XGBoost",
 modelBullet2:"Valeurs manquantes: Imputation KNN",
@@ -148,7 +148,7 @@ methodLong4:"The final result is presented as a recurrence probability with a ri
   disclaimer:"Important limitation", disclaimerText:"This website is an academic prototype. It does not replace diagnosis, medical advice, or treatment decisions.",
   aboutTitle:"About the project", aboutIntro:"BCRTracker was developed as a final-year project on breast cancer recurrence prediction using machine learning.",
   dataModel:"Prediction Model",
-dataText:"The frontend collects raw values. The backend handles encoding, imputation, and prediction.",
+
 modelDetailsTitle:"Model details:",
 modelBullet1:"Final model: XGBoost",
 modelBullet2:"Missing values: KNN imputation",
@@ -252,7 +252,7 @@ methodLong4:"يتم تقديم النتيجة النهائية كاحتمال ل
   disclaimer:"تنبيه مهم", disclaimerText:"هذا الموقع نموذج أكاديمي ولا يعوض التشخيص أو الرأي الطبي أو القرار العلاجي.",
   aboutTitle:"حول المشروع", aboutIntro:"تم تطوير BCRTracker في إطار مشروع نهاية الدراسة حول التنبؤ بعودة سرطان الثدي باستعمال التعلم الآلي.",
  dataModel:"نموذج التنبؤ",
-dataText:"تجمع الواجهة الأمامية البيانات الأولية. يتولى الخادم عملية الترميز، تعويض القيم المفقودة، والتنبؤ.",
+
 modelDetailsTitle:"تفاصيل النموذج:",
 modelBullet1:"النموذج النهائي: XGBoost",
 modelBullet2:"القيم المفقودة: تقدير KNN",
