@@ -316,9 +316,9 @@ modelBullet4:"المخرجات: احتمال عودة المرض ومستوى ا
   saveResult:"حفظ النتيجة",
   savedSuccess:"تم حفظ النتيجة!",
   saveError:"خطأ في حفظ النتيجة",
-riskLow:"عودة غير محتملة",
-riskHigh:"عودة محتملة",
-riskMedium:"خطر متوسط"
+  riskLow:"عودة غير محتملة",
+  riskHigh:"عودة محتملة",
+  riskMedium:"خطر متوسط"
  }
 };
 
