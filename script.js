@@ -450,8 +450,17 @@ function initResult(){
   const p=Number(d.recurrence_probability).toFixed(1);
   const risk=d.risk_level||"Unknown";
   const klass=risk.toLowerCase()==="low"?"risk-low":risk.toLowerCase()==="medium"?"risk-medium":"risk-high";
+  
+  // Traduire le niveau de risque
+  let riskText = "";
+  if (risk === "Low") riskText = t("riskLow");
+  else if (risk === "Medium") riskText = t("riskMedium");
+  else if (risk === "High") riskText = t("riskHigh");
+  else riskText = risk;
+  
   const demoBanner = d._demo ? `<div class="demo-notice">⚠️ ${t("demoNotice")}</div>` : "";
-  box.innerHTML=demoBanner+`<div class="result-card"><span class="probability">${p}%</span><p>${t("resultTitle")}</p><span class="risk-pill ${klass}">${risk}</span><p class="helper">${d.model_used||""}</p></div>`;
+  box.innerHTML=demoBanner+`<div class="result-card"><span class="probability">${p}%</span><p>${t("resultTitle")}</p><span class="risk-pill ${klass}">${riskText}</span><p class="helper">${d.model_used||""}</p></div>`;
+  
   // Bouton sauvegarder
   const saveBtn = document.getElementById("saveResultBtn");
   if(saveBtn) {
