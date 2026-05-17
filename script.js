@@ -229,7 +229,7 @@ modelBullet4:"Output: recurrence probability and risk level",
   stat1Label:"حالة تشخيص جديدة سنوياً حول العالم",
   stat1Source:"المصدر: منظمة الصحة العالمية، 2022",
   stat2Label:"من النساء ستُصبن بسرطان الثدي خلال حياتهن",
-  stat2Source:"المصدر: الجمعية الأمريكية للسرطان، 2022",
+  stat2Source:"المصدر: الجمعية الأمريكية للسرطان",
   stat3Label:"نسبة البقاء 5 سنوات عند الاكتشاف المبكر",
   stat3Source:"المصدر: المعهد الوطني للسرطان، 2023",
   stat4Label:"وفاة سنوياً، 70% منها في البلدان ذات الدخل المنخفض أو المتوسط",
@@ -316,9 +316,9 @@ modelBullet4:"المخرجات: احتمال عودة المرض ومستوى ا
   saveResult:"حفظ النتيجة",
   savedSuccess:"تم حفظ النتيجة!",
   saveError:"خطأ في حفظ النتيجة",
-  riskLow:"عودة غير محتملة",
-  riskHigh:"عودة محتملة",
-  riskMedium:"خطر متوسط"
+riskLow:"عودة غير محتملة",
+riskHigh:"عودة محتملة",
+riskMedium:"خطر متوسط"
  }
 };
 
@@ -430,11 +430,10 @@ function initPrediction(){
     // Add slight randomness so repeated runs vary a little
     score += (Math.random() * 6 - 3);
     score = Math.max(3, Math.min(92, score));
-    const prob = score;
-    const prediction = prob >= 50 ? "Recurrence likely" : "Recurrence unlikely";
+    const risk = score < 25 ? "Low" : score < 50 ? "Medium" : "High";
     return {
-      recurrence_probability: prob,
-      prediction: prediction,
+      recurrence_probability: score.toFixed(1),
+      risk_level: risk,
       model_used: "Demo Mode — backend non connecté"
     };
   }
@@ -442,50 +441,28 @@ function initPrediction(){
 }
 document.addEventListener("DOMContentLoaded",initPrediction);
 
-// MODIFICATION: Fonction initResult mise à jour
+
 function initResult(){
   const box=document.getElementById("resultBox"); if(!box) return;
   const raw=localStorage.getItem("lastPrediction");
   if(!raw){box.innerHTML=`<div class="notice">${t("noResult")}</div>`; return;}
   const d=JSON.parse(raw);
-  const p = Number(d.recurrence_probability).toFixed(1);
-  
-  // Utiliser "prediction" au lieu de "risk_level"
-  const prediction = d.prediction || (d.risk_level ? 
-    (d.risk_level === "Low" ? "Recurrence unlikely" : 
-     d.risk_level === "High" ? "Recurrence likely" : "Unknown") : "Unknown");
-  
-  //   // Déterminer la classe CSS basée sur la prédiction
-  let klass = "risk-medium";
-  if (prediction.toLowerCase().includes("unlikely")) klass = "risk-low";
-  if (prediction.toLowerCase().includes("likely")) klass = "risk-high";
-  
-  // Texte à afficher (traduit)
-  const predictionText = prediction === "Recurrence likely" ? t("riskHigh") : 
-                         prediction === "Recurrence unlikely" ? t("riskLow") : prediction;
-  
+  const p=Number(d.recurrence_probability).toFixed(1);
+  const risk=d.risk_level||"Unknown";
+  const klass=risk.toLowerCase()==="low"?"risk-low":risk.toLowerCase()==="medium"?"risk-medium":"risk-high";
   const demoBanner = d._demo ? `<div class="demo-notice">⚠️ ${t("demoNotice")}</div>` : "";
-  
-  box.innerHTML = demoBanner + `
-    <div class="result-card">
-      <span class="probability">${p}%</span>
-      <p>${t("resultTitle")}</p>
-      <span class="risk-pill ${klass}">${predictionText}</span>
-      <p class="helper">${d.model_used || ""}</p>
-    </div>
-  `;
-  
+  box.innerHTML=demoBanner+`<div class="result-card"><span class="probability">${p}%</span><p>${t("resultTitle")}</p><span class="risk-pill ${klass}">${risk}</span><p class="helper">${d.model_used||""}</p></div>`;
   // Bouton sauvegarder
   const saveBtn = document.getElementById("saveResultBtn");
   if(saveBtn) {
     saveBtn.addEventListener("click", function() {
-      saveResultToFile(d, p, predictionText);
+      saveResultToFile(d, p, risk);
     });
   }
 }
 
 // Fonction pour sauvegarder le résultat
-function saveResultToFile(result, probability, predictionText) {
+function saveResultToFile(result, probability, riskLevel) {
   try {
     const date = new Date();
     const formattedDate = date.toLocaleString();
@@ -496,7 +473,7 @@ BCRTracker - Résultat de prédiction
 
 Date : ${formattedDate}
 Probabilité de récidive : ${probability}%
-Prédiction : ${predictionText}
+Niveau de risque : ${riskLevel}
 Modèle utilisé : ${result.model_used || "Non spécifié"}
 
 ========================================
@@ -553,4 +530,4 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
-document.addEventListener("DOMContentLoaded", initResult);
+document.addEventListener("DOMContentLoaded",initResult);
