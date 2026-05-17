@@ -110,7 +110,11 @@ modelBullet4:"Sortie: probabilité de récidive et niveau de risque",
   saveError:"Erreur lors de la sauvegarde",
   riskLow:"Récidive improbable",
   riskHigh:"Récidive probable",
-  riskMedium:"Risque modéré"
+  riskMedium:"Risque modéré",
+  // Nouveaux codes de prédiction pour traduction automatique
+  HIGH_RISK:"Risque élevé",
+  MEDIUM_RISK:"Risque modéré",
+  LOW_RISK:"Risque faible"
  },
  en:{
   home:"Home", predict:"Prediction", prevention:"Prevention", about:"About", donate:"Donate",
@@ -214,7 +218,11 @@ modelBullet4:"Output: recurrence probability and risk level",
   saveError:"Error saving result",
   riskLow:"Recurrence unlikely",
   riskHigh:"Recurrence likely",
-  riskMedium:"Moderate risk"
+  riskMedium:"Moderate risk",
+  // Nouveaux codes de prédiction pour traduction automatique
+  HIGH_RISK:"High Risk",
+  MEDIUM_RISK:"Medium Risk",
+  LOW_RISK:"Low Risk"
  },
  ar:{
   home:"الرئيسية", predict:"التنبؤ", prevention:"الوقاية", about:"حول المشروع", donate:"تبرع",
@@ -229,7 +237,7 @@ modelBullet4:"Output: recurrence probability and risk level",
   stat1Label:"حالة تشخيص جديدة سنوياً حول العالم",
   stat1Source:"المصدر: منظمة الصحة العالمية، 2022",
   stat2Label:"من النساء ستُصبن بسرطان الثدي خلال حياتهن",
-  stat2Source:"المصدر: الجمعية الأمريكية للسرطان",
+  stat2Source:"المصدر: الجمعية الأمريكية للسرطان، 2022",
   stat3Label:"نسبة البقاء 5 سنوات عند الاكتشاف المبكر",
   stat3Source:"المصدر: المعهد الوطني للسرطان، 2023",
   stat4Label:"وفاة سنوياً، 70% منها في البلدان ذات الدخل المنخفض أو المتوسط",
@@ -318,7 +326,11 @@ modelBullet4:"المخرجات: احتمال عودة المرض ومستوى ا
   saveError:"خطأ في حفظ النتيجة",
   riskLow:"عودة غير محتملة",
   riskHigh:"عودة محتملة",
-  riskMedium:"خطر متوسط"
+  riskMedium:"خطر متوسط",
+  // Nouveaux codes de prédiction pour traduction automatique
+  HIGH_RISK:"خطر مرتفع",
+  MEDIUM_RISK:"خطر متوسط",
+  LOW_RISK:"خطر منخفض"
  }
 };
 
@@ -331,12 +343,37 @@ function applyLanguage(){
   document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent=t(el.dataset.i18n); });
   document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{ el.placeholder=t(el.dataset.i18nPlaceholder); });
   const sel=document.getElementById("languageSelect"); if(sel) sel.value=lang;
+  
+  // ← NOUVEAU : Mettre à jour le résultat si on est sur la page result.html
+  if(window.location.pathname.includes("result.html")) {
+    updateResultTranslation();
+  }
+}
+
+// ← NOUVEAU : Fonction pour mettre à jour la traduction du résultat sans rafraîchir
+function updateResultTranslation() {
+  const riskElement = document.querySelector(".risk-pill");
+  const riskTextElement = document.querySelector(".result-card p:first-of-type");
+  
+  if(riskElement && riskElement.dataset.riskCode) {
+    const riskCode = riskElement.dataset.riskCode;
+    riskElement.textContent = t(riskCode);
+  }
+  
+  if(riskTextElement && riskTextElement.dataset.titleKey) {
+    riskTextElement.textContent = t(riskTextElement.dataset.titleKey);
+  }
 }
 
 function initCommon(){
   applyLanguage();
   const sel=document.getElementById("languageSelect");
-  if(sel) sel.addEventListener("change",()=>{localStorage.setItem("lang",sel.value);applyLanguage();});
+  if(sel) sel.addEventListener("change",()=>{
+    localStorage.setItem("lang",sel.value);
+    applyLanguage();
+    // ← NOUVEAU : Mettre à jour le résultat immédiatement
+    updateResultTranslation();
+  });
   const savedTheme=localStorage.getItem("theme");
   if(savedTheme==="dark") document.body.classList.add("dark");
   const mode=document.getElementById("modeButton");
@@ -430,10 +467,19 @@ function initPrediction(){
     // Add slight randomness so repeated runs vary a little
     score += (Math.random() * 6 - 3);
     score = Math.max(3, Math.min(92, score));
-    const risk = score < 25 ? "Low" : score < 50 ? "Medium" : "High";
+    let risk = "Low";
+    let predictionCode = "LOW_RISK";
+    if (score >= 50) {
+      risk = "High";
+      predictionCode = "HIGH_RISK";
+    } else if (score >= 25) {
+      risk = "Medium";
+      predictionCode = "MEDIUM_RISK";
+    }
     return {
       recurrence_probability: score.toFixed(1),
       risk_level: risk,
+      prediction_code: predictionCode,  // ← NOUVEAU : code pour traduction
       model_used: "Demo Mode — backend non connecté"
     };
   }
@@ -448,24 +494,38 @@ function initResult(){
   if(!raw){box.innerHTML=`<div class="notice">${t("noResult")}</div>`; return;}
   const d=JSON.parse(raw);
   const p=Number(d.recurrence_probability).toFixed(1);
-  const risk=d.risk_level||"Unknown";
-  const klass=risk.toLowerCase()==="low"?"risk-low":risk.toLowerCase()==="medium"?"risk-medium":"risk-high";
   
-  // Traduire le niveau de risque
-  let riskText = "";
-  if (risk === "Low") riskText = t("riskLow");
-  else if (risk === "Medium") riskText = t("riskMedium");
-  else if (risk === "High") riskText = t("riskHigh");
-  else riskText = risk;
+  // ← MODIFIÉ : Utiliser prediction_code s'il existe, sinon fallback sur risk_level
+  let riskCode = d.prediction_code;
+  if (!riskCode) {
+    // Fallback pour compatibilité avec anciens résultats
+    const risk = d.risk_level || "Unknown";
+    if (risk === "Low") riskCode = "LOW_RISK";
+    else if (risk === "Medium") riskCode = "MEDIUM_RISK";
+    else if (risk === "High") riskCode = "HIGH_RISK";
+    else riskCode = "LOW_RISK";
+  }
+  
+  const riskText = t(riskCode);  // ← Traduction automatique selon langue courante
+  const klass = riskCode === "LOW_RISK" ? "risk-low" : (riskCode === "MEDIUM_RISK" ? "risk-medium" : "risk-high");
   
   const demoBanner = d._demo ? `<div class="demo-notice">⚠️ ${t("demoNotice")}</div>` : "";
-  box.innerHTML=demoBanner+`<div class="result-card"><span class="probability">${p}%</span><p>${t("resultTitle")}</p><span class="risk-pill ${klass}">${riskText}</span><p class="helper">${d.model_used||""}</p></div>`;
+  box.innerHTML = demoBanner + `<div class="result-card">
+    <span class="probability">${p}%</span>
+    <p data-i18n="resultTitle" data-title-key="resultTitle">${t("resultTitle")}</p>
+    <span class="risk-pill ${klass}" data-risk-code="${riskCode}">${riskText}</span>
+    <p class="helper">${d.model_used || ""}</p>
+  </div>`;
+  
+  // ← NOUVEAU : Stocker les attributs pour traduction dynamique
+  const resultTitleEl = box.querySelector(".result-card p:first-of-type");
+  if(resultTitleEl) resultTitleEl.dataset.titleKey = "resultTitle";
   
   // Bouton sauvegarder
   const saveBtn = document.getElementById("saveResultBtn");
   if(saveBtn) {
     saveBtn.addEventListener("click", function() {
-      saveResultToFile(d, p, risk);
+      saveResultToFile(d, p, riskText);
     });
   }
 }
