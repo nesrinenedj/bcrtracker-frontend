@@ -1,4 +1,3 @@
-
 const API_URL = "https://backend-5mfy.onrender.com/predict";
 const GENES = ['AKT1','ALK','ANKRD11','APC','ARID1A','ARID1B','ARID2','ATM','ATR','ATRX','BCOR','BRCA1','BRCA2','BRIP1','CARD11','CBFB','CDH1','CDK12','CDKN1B','CDKN2A','CDKN2Ap16INK4A','CIC','CREBBP','CTCF','DICER1','DNMT1','DNMT3A','DOT1L','EGFR','EP300','EPHA5','ERBB2','ERBB3','ERBB4','ESR1','FAT1','FGFR4','FLT4','FOXA1','FOXP1','GATA3','GRIN2A','IGF1R','IKZF1','JAK1','KDM5A','KDM5C','KDM6A','KDR','KLF4','KMT2C','LATS2','MAP2K4','MAP3K1','MED12','MEN1','MGA','MLL','MLL2','MLL3','MTOR','NCOR1','NF1','NOTCH1','NOTCH2','NOTCH3','NOTCH4','NSD1','PBRM1','PDGFRA','PIK3C2G','PIK3CA','PIK3CB','PIK3CG','PIK3R1','PLK2','POLE','PTCH1','PTEN','PTPRD','PTPRS','PTPRT','RB1','RICTOR','ROS1','RUNX1','SETD2','SF3B1','SMAD4','SMARCA4','SPEN','STAG2','STK11','TBX3','TERT','TET1','TET2','TP53','TSC2','ZFHX3'];
 
@@ -10,7 +9,7 @@ const I18N = {
   start:"Lancer la prédiction", learn:"En savoir plus",
   f1:"Évaluation personnalisée du risque", f2:"Données cliniques et génomiques", f3:"Résultat clair et interprétable",
 
-  // Awareness section
+  
   awarenessLabel:"Sensibilisation",
   awarenessTitle:"Le cancer du sein en chiffres",
   awarenessSubtitle:"Des données mondiales pour mieux comprendre et agir.",
@@ -24,7 +23,7 @@ const I18N = {
   stat4Source:"Source : OMS, 2022",
   awareCta:"Découvrir la prévention →",
 
-  // Methodology (about page only)
+
   methodology:"Méthodologie", methIntro:"Le parcours du site est simple : saisir les données disponibles, les envoyer au backend, puis afficher la prédiction.",
 methodLong1:"Notre outil repose sur un modèle d'apprentissage automatique conçu pour estimer le risque de récidive du cancer du sein à partir de données cliniques, avec la possibilité d'inclure des informations génomiques lorsqu'elles sont disponibles. Les informations saisies sont traitées par le modèle en plusieurs étapes avant de produire un résultat estimé.",
 methodLong2:"Les principaux indicateurs utilisés incluent :",
@@ -49,11 +48,11 @@ modelBullet3:"Déséquilibre des classes: ADASYN",
 modelBullet4:"Sortie: probabilité de récidive et niveau de risque",
   objective:"Objectif", objectiveText:"L'objectif est de proposer une estimation claire du risque de récidive et de rendre le résultat plus lisible.",
 
-  // Prediction form
+
   predictTitle:"Prédiction du risque de récidive", predictIntro:"Tous les champs cliniques sont obligatoires. Seules les données génomiques sont optionnelles.",
   patient:"Informations patient", staging:"Stadification", tumor:"Caractéristiques tumorales", receptors:"Statut des récepteurs", genomic:"Données génomiques optionnelles",
 
-  // Form field labels
+
   fldAge:"Âge au diagnostic",
   fldSex:"Sexe",
   fldMeno:"Statut ménopausique",
@@ -73,7 +72,7 @@ modelBullet4:"Sortie: probabilité de récidive et niveau de risque",
   fldReceptorPrimary:"Récepteurs primaires",
   helperOptional:"Laissez vide si non disponible.",
 
-  // Select options
+
   optSelectOne:"-- Sélectionner --", optFemale:"Féminin", optMale:"Masculin",
   optPre:"Pré-ménopause", optPeri:"Péri-ménopause", optPost:"Post-ménopause",
   optUnknown:"Inconnu",
@@ -111,7 +110,7 @@ modelBullet4:"Sortie: probabilité de récidive et niveau de risque",
   riskLow:"Récidive improbable",
   riskHigh:"Récidive probable",
   riskMedium:"Risque modéré",
-  // Nouveaux codes de prédiction pour traduction automatique
+
   HIGH_RISK:"Risque élevé",
   MEDIUM_RISK:"Risque modéré",
   LOW_RISK:"Risque faible"
@@ -219,7 +218,7 @@ modelBullet4:"Output: recurrence probability and risk level",
   riskLow:"Recurrence unlikely",
   riskHigh:"Recurrence likely",
   riskMedium:"Moderate risk",
-  // Nouveaux codes de prédiction pour traduction automatique
+
   HIGH_RISK:"High Risk",
   MEDIUM_RISK:"Medium Risk",
   LOW_RISK:"Low Risk"
@@ -327,7 +326,7 @@ modelBullet4:"المخرجات: احتمال عودة المرض ومستوى ا
   riskLow:"عودة غير محتملة",
   riskHigh:"عودة محتملة",
   riskMedium:"خطر متوسط",
-  // Nouveaux codes de prédiction pour traduction automatique
+
   HIGH_RISK:"خطر مرتفع",
   MEDIUM_RISK:"خطر متوسط",
   LOW_RISK:"خطر منخفض"
@@ -344,13 +343,12 @@ function applyLanguage(){
   document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{ el.placeholder=t(el.dataset.i18nPlaceholder); });
   const sel=document.getElementById("languageSelect"); if(sel) sel.value=lang;
   
-  // ← NOUVEAU : Mettre à jour le résultat si on est sur la page result.html
   if(window.location.pathname.includes("result.html")) {
     updateResultTranslation();
   }
 }
 
-// ← NOUVEAU : Fonction pour mettre à jour la traduction du résultat sans rafraîchir
+
 function updateResultTranslation() {
   const riskElement = document.querySelector(".risk-pill");
   const riskTextElement = document.querySelector(".result-card p:first-of-type");
@@ -371,7 +369,7 @@ function initCommon(){
   if(sel) sel.addEventListener("change",()=>{
     localStorage.setItem("lang",sel.value);
     applyLanguage();
-    // ← NOUVEAU : Mettre à jour le résultat immédiatement
+
     updateResultTranslation();
   });
   const savedTheme=localStorage.getItem("theme");
@@ -390,6 +388,7 @@ function renderGenes(){
     grid.querySelectorAll(".gene-item").forEach(item=>item.style.display=item.textContent.toLowerCase().includes(v)?"flex":"none");
   });
 }
+
 function initPrediction(){
   const form=document.getElementById("predictionForm"); if(!form) return;
   renderGenes();
@@ -403,19 +402,19 @@ function initPrediction(){
     loading.style.display="block"; error.textContent="";
     const fd=new FormData(form);
     const pct=name=>{const raw=fd.get(name); return raw===""||raw===null?null:Number(raw);}
-    // Map translated option values back to API-expected English values
+    
     const lang=localStorage.getItem("lang")||"fr";
     const sexVal = fd.get("SEX");
     const menoVal = fd.get("MENOPAUSAL_STATUS_AT_DIAGNOSIS");
     const latVal = fd.get("LATERALITY");
 
-    // Helper: reverse-lookup original value from i18n key
+
     function getApiVal(fieldVal, mapping){
-      if(lang==="en") return fieldVal; // English keys are API values
+      if(lang==="en") return fieldVal;
       for(const [apiKey, i18nKey] of Object.entries(mapping)){
         if(I18N[lang] && I18N[lang][i18nKey]===fieldVal) return apiKey;
       }
-      return fieldVal; // fallback
+      return fieldVal;
     }
 
     const payload={clinical:{
@@ -424,7 +423,7 @@ function initPrediction(){
       INVASIVE_CARCINOMA_DX_AGE:Number(fd.get("INVASIVE_CARCINOMA_DX_AGE")),
       SEX: getApiVal(sexVal, {"Female":"optFemale","Male":"optMale"}),
       MENOPAUSAL_STATUS_AT_DIAGNOSIS: getApiVal(menoVal, {"Pre":"optPre","Peri":"optPeri","Post":"optPost","Male":"optMale","Unknown":"optUnknown"}),
-      LATERALITY: getApiVal(latVal, {"Bilateral/Right":"optBilateral","Left":"optLeft","Right":"optRight","Unknown":"optUnknown"}),
+      LATERALITY: getApiVal(latVal, {"Bilateral/Right":"optBilateral","Left":"optLeft","Right":"optRight"}),
       OVERALL_TUMOR_GRADE:fd.get("OVERALL_TUMOR_GRADE"),
       PRIMARY_NUCLEAR_GRADE:fd.get("PRIMARY_NUCLEAR_GRADE"),
       HER2_STATUS_PRIMARY:fd.get("HER2_STATUS_PRIMARY"),
@@ -434,7 +433,9 @@ function initPrediction(){
       RECEPTOR_STATUS_PRIMARY:fd.get("RECEPTOR_STATUS_PRIMARY"),
       TUMOR_SAMPLE_HISTOLOGY:fd.get("TUMOR_SAMPLE_HISTOLOGY")
     }, genes:null};
+    
     if(toggle.checked){payload.genes={}; fd.getAll("gene").forEach(g=>payload.genes[g]=1);}
+    
     try{
       let data;
       try{
@@ -442,7 +443,7 @@ function initPrediction(){
         data=await res.json();
         if(!res.ok) throw new Error(data.error||"Prediction failed.");
       }catch(_){
-        // Backend not available — generate a realistic demo result from the form data
+
         data = generateMockResult(payload);
         data._demo = true;
       }
@@ -450,41 +451,42 @@ function initPrediction(){
       location.href="result.html";
     }catch(err){error.textContent=err.message||"Server error."}
     finally{loading.style.display="none";}
-
-  function generateMockResult(payload){
-    const c = payload.clinical;
-    let score = 0;
-    // Simple heuristic scoring for a realistic demo
-    const stageWeights = {IA:0,IB:5,IIA:15,IIB:25,IIIA:38,IIIB:48,IIIC:55,IV:70};
-    score += stageWeights[c.STAGE_AT_DIAGNOSIS] || 20;
-    if(c.OVERALL_TUMOR_GRADE && c.OVERALL_TUMOR_GRADE.startsWith("III")) score += 15;
-    else if(c.OVERALL_TUMOR_GRADE && c.OVERALL_TUMOR_GRADE.startsWith("II")) score += 7;
-    if(c.OVERALL_HER2_STATUS === "Positive") score += 10;
-    if(c.OVERALL_RECEPTOR_STATUS_PATIENT === "Triple Negative") score += 12;
-    if(c.M_STAGE === "M1") score += 20;
-    if(c.INVASIVE_CARCINOMA_DX_AGE < 40) score += 8;
-    if(payload.genes && Object.keys(payload.genes).some(g=>["BRCA1","BRCA2","TP53"].includes(g))) score += 10;
-    // Add slight randomness so repeated runs vary a little
-    score += (Math.random() * 6 - 3);
-    score = Math.max(3, Math.min(92, score));
-    let risk = "Low";
-    let predictionCode = "LOW_RISK";
-    if (score >= 50) {
-      risk = "High";
-      predictionCode = "HIGH_RISK";
-    } else if (score >= 25) {
-      risk = "Medium";
-      predictionCode = "MEDIUM_RISK";
-    }
-    return {
-      recurrence_probability: score.toFixed(1),
-      risk_level: risk,
-      prediction_code: predictionCode,  // ← NOUVEAU : code pour traduction
-      model_used: "Demo Mode — backend non connecté"
-    };
-  }
   });
 }
+
+function generateMockResult(payload){
+  const c = payload.clinical;
+  let score = 0;
+  const stageWeights = {IA:0,IB:5,IIA:15,IIB:25,IIIA:38,IIIB:48,IIIC:55,IV:70};
+  score += stageWeights[c.STAGE_AT_DIAGNOSIS] || 20;
+  if(c.OVERALL_TUMOR_GRADE && c.OVERALL_TUMOR_GRADE.startsWith("III")) score += 15;
+  else if(c.OVERALL_TUMOR_GRADE && c.OVERALL_TUMOR_GRADE.startsWith("II")) score += 7;
+  if(c.OVERALL_HER2_STATUS === "Positive") score += 10;
+  if(c.OVERALL_RECEPTOR_STATUS_PATIENT === "Triple Negative") score += 12;
+  if(c.M_STAGE === "M1") score += 20;
+  if(c.INVASIVE_CARCINOMA_DX_AGE < 40) score += 8;
+  if(payload.genes && Object.keys(payload.genes).some(g=>["BRCA1","BRCA2","TP53"].includes(g))) score += 10;
+  score += (Math.random() * 6 - 3);
+  score = Math.max(3, Math.min(92, score));
+  
+  let risk = "Low";
+  let predictionCode = "LOW_RISK";
+  if (score >= 50) {
+    risk = "High";
+    predictionCode = "HIGH_RISK";
+  } else if (score >= 25) {
+    risk = "Medium";
+    predictionCode = "MEDIUM_RISK";
+  }
+  
+  return {
+    recurrence_probability: score.toFixed(1),
+    risk_level: risk,
+    prediction_code: predictionCode,
+    model_used: "Demo Mode — backend non connecté"
+  };
+}
+
 document.addEventListener("DOMContentLoaded",initPrediction);
 
 
@@ -495,10 +497,10 @@ function initResult(){
   const d=JSON.parse(raw);
   const p=Number(d.recurrence_probability).toFixed(1);
   
-  // ← MODIFIÉ : Utiliser prediction_code s'il existe, sinon fallback sur risk_level
+
   let riskCode = d.prediction_code;
   if (!riskCode) {
-    // Fallback pour compatibilité avec anciens résultats
+
     const risk = d.risk_level || "Unknown";
     if (risk === "Low") riskCode = "LOW_RISK";
     else if (risk === "Medium") riskCode = "MEDIUM_RISK";
@@ -506,7 +508,7 @@ function initResult(){
     else riskCode = "LOW_RISK";
   }
   
-  const riskText = t(riskCode);  // ← Traduction automatique selon langue courante
+  const riskText = t(riskCode);
   const klass = riskCode === "LOW_RISK" ? "risk-low" : (riskCode === "MEDIUM_RISK" ? "risk-medium" : "risk-high");
   
   const demoBanner = d._demo ? `<div class="demo-notice">⚠️ ${t("demoNotice")}</div>` : "";
@@ -517,11 +519,11 @@ function initResult(){
     <p class="helper">${d.model_used || ""}</p>
   </div>`;
   
-  // ← NOUVEAU : Stocker les attributs pour traduction dynamique
+
   const resultTitleEl = box.querySelector(".result-card p:first-of-type");
   if(resultTitleEl) resultTitleEl.dataset.titleKey = "resultTitle";
   
-  // Bouton sauvegarder
+
   const saveBtn = document.getElementById("saveResultBtn");
   if(saveBtn) {
     saveBtn.addEventListener("click", function() {
@@ -530,7 +532,7 @@ function initResult(){
   }
 }
 
-// Fonction pour sauvegarder le résultat
+
 function saveResultToFile(result, probability, riskLevel) {
   try {
     const date = new Date();
@@ -567,7 +569,7 @@ l'avis d'un médecin.
   }
 }
 
-// Fonction pour afficher une notification
+
 function showNotification(message, type) {
   const notification = document.createElement("div");
   notification.textContent = message;
@@ -588,7 +590,7 @@ function showNotification(message, type) {
   setTimeout(() => notification.remove(), 2500);
 }
 
-// Ajouter l'animation CSS
+
 const style = document.createElement('style');
 style.textContent = `
   @keyframes fadeInOut {
